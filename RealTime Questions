@@ -1,0 +1,16 @@
+1. How do you check running processes in Linux?
+Ans: ps -ef, top, htop(if installed)
+"I usually use ps -ef to get a snapshot of all the running processes with full details. For real-time monitoring, I use top, and if htop is available, I prefer that since it gives a more user-friendly view with interactive options."
+2. What’s the difference between top, htop, and ps?
+Ans:                                                                                  
+ ps   :-Shows a static snapshot of current processes (`ps -ef` or `ps aux`)                           
+ top :- Real-time dynamic view of processes; updated continuously                                     
+ htop :- Enhanced version of `top` with color UI, scrolling, filtering, and process tree (interactive) 
+3. How to schedule a cron job every 15 minutes?
+Ans:"I edit the crontab using crontab -e and add an entry like */15 * * * * /path/to/script.sh. This means the script will run every 15 minutes. I also redirect the output to log files for monitoring."
+4. What is the difference between hard link and soft link?
+Ans:A hard link is another name for the same file and points to the same inode, so the file still works even if the original is deleted. A soft link, or symbolic link, is like a shortcut — it points to the file path. If the original file is deleted, the soft link breaks. Also, soft links can work across file systems, but hard links can’t.
+5. How to find which process is using high memory?
+Ans:ps aux --sort=-%mem | head -n 10
+Or run top or htop and sort by memory column.
+I usually run ps aux --sort=-%mem | head to sort processes by memory usage. Alternatively, I use top or htop and sort by the memory column to identify the process consuming the most RAM. This helps in investigating memory leaks or spikes."
