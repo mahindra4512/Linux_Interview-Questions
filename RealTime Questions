@@ -14,3 +14,4 @@ Ans:A hard link is another name for the same file and points to the same inode, 
 Ans:ps aux --sort=-%mem | head -n 10
 Or run top or htop and sort by memory column.
 I usually run ps aux --sort=-%mem | head to sort processes by memory usage. Alternatively, I use top or htop and sort by the memory column to identify the process consuming the most RAM. This helps in investigating memory leaks or spikes."
+6. What is sed command in linux , write an example for it ? 
