@@ -16,5 +16,10 @@ Or run top or htop and sort by memory column.
 I usually run ps aux --sort=-%mem | head to sort processes by memory usage. Alternatively, I use top or htop and sort by the memory column to identify the process consuming the most RAM. This helps in investigating memory leaks or spikes."
 6. What is sed command in linux , write an example for it ? 
 Ans: SED(STREAM EDITOR) To replace the words in a file Ex: sed -i 's/unix/linux/g' file1	: to replace and reflect unix with linux
-
+7.Can you briefly explain how does the Linux boot processing happen? 
+8.So for services to load, there is one specific service in Linux. So can you name that service?
+9.Disk space is full on a production server — what do you do?
+ 🔹 A process is consuming high CPU — how do you troubleshoot it?
+ 🔹 A server is not reachable via SSH — how would you diagnose it?
+ 🔹 How do you schedule regular backups using cron?
 
