@@ -18,8 +18,18 @@ I usually run ps aux --sort=-%mem | head to sort processes by memory usage. Alte
 Ans: SED(STREAM EDITOR) To replace the words in a file Ex: sed -i 's/unix/linux/g' file1	: to replace and reflect unix with linux
 7.Can you briefly explain how does the Linux boot processing happen? 
 8.So for services to load, there is one specific service in Linux. So can you name that service?
+Ans: Yes, the key service that loads and manages other services during the Linux boot process is systemd.
 9.Disk space is full on a production server — what do you do?
- 🔹 A process is consuming high CPU — how do you troubleshoot it?
- 🔹 A server is not reachable via SSH — how would you diagnose it?
- 🔹 How do you schedule regular backups using cron?
+Ans:
+1.First, I run df -h to identify which partition is full and then use du -sh /* or du -ahx / | sort -rh | head -20 to find large files or directories.
+2.I usually check locations like /var/log, /tmp, or /home where log files, core dumps, or temp files might be growing unexpectedly.
+3.If I find old log files, I archive or delete them carefully. For example, I might use logrotate or remove *.log.* or *.gz files after verifying.
+4.After resolving, I review monitoring and set up alerts to avoid a recurrence — for example, with Datadog, CloudWatch, or Prometheus alerts."
+10. A process is consuming high CPU — how do you troubleshoot it?
+Ans:I start with top, htop, or pidstat to identify the exact PID and process name using excessive CPU. This helps me quickly spot abnormal behavior.
+11. A server is not reachable via SSH — how would you diagnose it?
+Ans:If a server is not reachable via SSH, I first check basic network connectivity using ping and then use telnet or nc to test if port 22 is open. If it’s a cloud server, I verify security groups or firewall rules. I also try accessing it via console if available. Once inside, I check if the sshd service is running and inspect logs for SSH errors. I also confirm I'm using the correct credentials and private key. 
+The goal is to isolate if it’s a network, firewall, or service issue.
+12. How do you schedule regular backups using cron?
+Ans:To schedule regular backups using cron, I write a shell script that performs the backup — for example, using tar or rsync to archive files or a mysqldump for databases. Then, I edit the crontab with crontab -e and add an entry like 0 2 * * * /path/to/backup.sh to run it daily at 2 AM
 
