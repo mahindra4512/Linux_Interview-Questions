@@ -54,3 +54,5 @@ merge will show files, rebase will not show files
 𝟮𝟯. 𝗴𝗶𝘁 𝗰𝗵𝗲𝗿𝗿𝘆-𝗽𝗶𝗰𝗸 𝗰𝗼𝗺𝗺𝗶𝘁_𝗶𝗱: Apply changes from a specific commit.
 𝟮𝟰. 𝗴𝗶𝘁 𝗯𝗿𝗮𝗻𝗰𝗵: Lists branches.
 𝟮𝟱. 𝗴𝗶𝘁 𝗿𝗲𝘀𝗲𝘁 --𝗵𝗮𝗿𝗱: Resets everything to a previous commit, erasing all uncommitted changes.
+8.How can we remove a file from Git without removing the filesystem?
+9. How can we discover if a branch has already been merged in Git?
