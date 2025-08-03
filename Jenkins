@@ -10,3 +10,80 @@ here on slave agent should be installed (java-11)
 without java-11 our slaves will not work.
 slaves are platform independent.
 label: way of assigning work to particular slave.
+
+1.What are some best practices for writing secure pipelines?
+Ans: Avoid hardcoding secrets:
+Use secret managers (e.g., AWS Secrets Manager, Azure Key Vault, HashiCorp Vault) or CI/CD credential stores to inject secrets securely.
+Use principle of least privilege:
+Grant only the minimum required permissions to pipeline jobs, service accounts, and users.
+I always aim for pipelines that are not just automated but also secure by design, with proper secrets handling, minimal access, and monitoring in place
+2.Explain the purpose of Jenkinsfile.
+Ans:A Jenkinsfile is a text file that defines the entire CI/CD pipeline as code for Jenkins. 
+It contains the stages, steps, and instructions needed to build, test, and deploy an application. 
+By storing the Jenkinsfile in the project’s source code repository, we enable Pipeline-as-Code, making the pipeline version-controlled, consistent, and repeatable.
+3.What are the key components of a CI/CD pipeline?
+Ans:
+Source Control,Build Stage,Test Stage,Artifact Repository,Deployment Stage,Monitoring & Feedback
+The goal of the CI/CD pipeline is to deliver reliable code quickly and securely, and I always ensure pipelines follow best practices for quality, security, and speed.
+4.enkins pipeline works in staging but fails in production — how do you debug?
+Ans:
+I review the pipeline logs in Jenkins for error messages, failed steps, or environment differences.
+I compare staging vs production logs to identify what’s different
+Production may have different environment variables, credentials, or network settings.
+I check Jenkins credentials (Secrets), configuration files, and any parameterized builds.
+I verify that production has the right IAM roles, firewall rules, or SSH access for deployment targets (e.g., VMs, databases, cloud services).
+5. Job stuck at “Waiting for executor” — what do you check?
+Ans:f a Jenkins job is stuck at ‘Waiting for executor,’ I know it means Jenkins is ready to run the job but there’s no available agent or executor.
+I first check the Jenkins node status to ensure agents are online and not offline.
+Then I verify the number of executors configured on each node — sometimes all are busy or too few are allocated.
+Depending on the issue, I might scale up agents, adjust executors, or correct any label mismatches to free up resources.
+6.How to roll back a failed deployment?
+Ans:
+I maintain versioned artifacts (e.g., tagged Docker images or JAR files) in Nexus or Docker Hub.
+The pipeline can redeploy the previous version using those artifacts with minimal manual effort
+7.How to prevent accidental prod deployments from feature branches?
+ANs:
+To prevent accidental production deployments from feature branches, I configure the pipeline to allow production deployments only from the main or release branches. 
+In Jenkins, for example, I use branch condition checks and restrict the deploy stage to trigger only on specific branches.
+8.Explain a typical CI/CD pipeline you’ve worked on.
+As:
+Source Stage:The pipeline was triggered by a GitHub commit or pull request. Jenkins pulled the latest code and checked out the correct branch
+Build Stage:We used Maven to compile the code and package it into a JAR file.
+Then I used Docker to build a container image and pushed it to Docker Hub or AWS ECR, with version tagging for easy rollback.
+Test Stage:Automated unit and integration tests ran as part of the pipeline.
+I also integrated SonarQube for static code analysis, ensuring code quality.
+Deploy Stage:using tomcat we will deploy
+Post-Deploy Monitoring:After deployment, monitoring tools like Prometheus and Grafana tracked system health. Alerts were sent via Slack or email for quick response.
+9.How to trigger a Jenkins job when code is pushed to GitHub?
+Ans:
+To trigger a Jenkins job on a GitHub push, I set up a webhook in GitHub that sends a payload to Jenkins whenever code is pushed.
+In Jenkins, I configure the job with GitHub hook trigger for GITScm polling or use Poll SCM with cron syntax if polling is preferred.
+10.How do you handle secrets in Jenkins pipelines?
+Ans:
+In Jenkins, I handle secrets securely using the Credentials plugin. 
+Secrets like API keys, passwords, and tokens are stored in Jenkins Credentials Manager and referenced in the pipeline without hardcoding them.
+This approach ensures secrets are centrally managed, encrypted, and securely injected(MY_SECRET) into the pipeline without exposure.
+11.How to pass parameters between stages?
+Ans:
+To pass data or parameters between stages in Jenkins, I use environment variables or Groovy variables defined at the pipeline level.
+12. What were the pass criteria when using SonarQube?
+Ans:
+Code Coverage: Minimum of 80% unit test coverage on new code.
+Duplicated Code: Less than 3% duplication in new code.
+Maintainability and Reliability Ratings: At least A rating.
+Code Smells: Had to be minimal or below a set threshold.
+13. Do you perform automated tests in your CD pipeline?
+Ans:
+Yes, we include automated tests in both our CI and CD pipelines to ensure code quality and reliability before deployment.
+In the CI pipeline, we run unit tests and static code analysis using SonarQube.
+In the CD pipeline, we perform integration tests, smoke tests, and in some cases, end-to-end tests after deployment to a staging environment.
+14.What is the difference between a single Jenkins CI/CD pipeline and multiple pipelines?
+Ans:
+A single Jenkins pipeline handles the entire CI/CD process — build, test, and deploy — in one file or job. It’s simpler to manage for small projects but can become complex and harder to maintain as the application grows.
+In contrast, multiple pipelines split the process into separate, modular pipelines — for example, one for build/test, one for deployment, and one for rollback or monitoring. 
+This is ideal for microservices or large teams, offering better scalability, reusability, and parallel development
+15.Current Jenkins version.
+Ans:
+As of July 2025, the latest Jenkins LTS (Long-Term Support) version is typically in the 2.440.x series.
+However, Jenkins releases new versions every few weeks, so the exact version may vary slightly.
+16.
