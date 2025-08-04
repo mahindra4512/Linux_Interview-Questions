@@ -86,4 +86,8 @@ This is ideal for microservices or large teams, offering better scalability, reu
 Ans:
 As of July 2025, the latest Jenkins LTS (Long-Term Support) version is typically in the 2.440.x series.
 However, Jenkins releases new versions every few weeks, so the exact version may vary slightly.
-16.
+16.How do you use Jenkins shared libraries? Explain their typical structure and how they are integrated into your Jenkinsfiles.
+Ans:
+In Jenkins, I use shared libraries to reuse common code like functions, steps, or pipeline logic across multiple Jenkinsfiles. 
+This helps keep pipelines DRY (Don’t Repeat Yourself), easier to maintain, and consistent across projects.
+
