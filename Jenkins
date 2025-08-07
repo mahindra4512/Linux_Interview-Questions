@@ -90,4 +90,6 @@ However, Jenkins releases new versions every few weeks, so the exact version may
 Ans:
 In Jenkins, I use shared libraries to reuse common code like functions, steps, or pipeline logic across multiple Jenkinsfiles. 
 This helps keep pipelines DRY (Don’t Repeat Yourself), easier to maintain, and consistent across projects.
-
+17.If the Jenkins pipeline runs but the build doesn’t happen, what possible issues could be causing it?
+18.What kind of applications do you deploy using Jenkins pipelines, and what deployment tools do you use?
+19.What is the purpose of a webhook, and how is it used in a CI/CD pipeline?
