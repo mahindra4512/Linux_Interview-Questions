@@ -1,1 +1,179 @@
+🔹 1. What is Docker and how does it work?
+Docker is a containerization platform that allows developers to package applications with all their dependencies into a single container. It works using the Docker Engine, which creates, manages, and runs containers using the host OS kernel.
 
+🔹 2. Difference between a container and a virtual machine?
+Feature	       Container	             Virtual Machine
+OS	          Shares host OS             kernel	Has its own guest OS
+Size	       Lightweight (MBs)	       Heavyweight (GBs)
+Boot time	    Seconds	                 Minutes
+Performance	   Faster	                 Slower due to OS virtualization
+
+🔹 3. What is the difference between Docker Image and Docker Container?
+Image is a read-only template with instructions for creating a container.
+
+Container is a runtime instance of an image (with state and process).
+
+🔹 4. How do you create a Docker image?
+Usually by writing a Dockerfile and using the command:
+
+bash
+Copy
+Edit
+docker build -t my-image-name .
+🔹 5. What is a Dockerfile?
+A text file that contains instructions (like FROM, COPY, RUN, etc.) to build a Docker image.
+
+🔹 6. What are common instructions used in a Dockerfile?
+FROM – Base image
+
+COPY / ADD – Add files to image
+
+RUN – Execute commands inside image
+
+CMD / ENTRYPOINT – Define default container execution
+
+EXPOSE – Inform about port
+
+WORKDIR – Set working directory
+
+🔹 7. How do you check running containers?
+bash
+Copy
+Edit
+docker ps
+🔹 8. How do you stop and remove a container?
+bash
+Copy
+Edit
+docker stop <container_id>
+docker rm <container_id>
+🔹 9. How do you persist data in Docker?
+Use Volumes or Bind Mounts:
+
+bash
+Copy
+Edit
+docker run -v myvolume:/data myimage
+🔹 10. What is the difference between CMD and ENTRYPOINT?
+CMD can be overridden by command line arguments.
+
+ENTRYPOINT sets the fixed command, arguments are appended.
+
+🔹 11. What is a Docker Volume?
+A persistent storage mechanism used to store data outside the container’s filesystem.
+
+🔹 12. What is the purpose of .dockerignore file?
+It prevents certain files/folders from being included in the Docker build context.
+
+🔹 13. What is Docker Compose?
+A tool for defining and managing multi-container Docker applications using a YAML file (docker-compose.yml).
+
+🔹 14. How do you scale services using Docker Compose?
+bash
+Copy
+Edit
+docker-compose up --scale web=3
+🔹 15. How do you debug a Docker container?
+docker logs <container_id>
+
+docker exec -it <container_id> /bin/bash
+
+Check container health with docker inspect
+
+🔹 16. How do you update a running container?
+You can't update it directly. You:
+
+Stop and remove the old container
+
+Build new image and run it
+
+🔹 17. How do you handle environment variables in Docker?
+Using -e option: docker run -e VAR=value myimage
+
+From .env file in Docker Compose
+
+🔹 18. What are Docker networking modes?
+Bridge (default)
+
+Host
+
+None
+
+Overlay (used in Swarm)
+
+🔹 19. What are some security practices you follow with Docker?
+Use minimal base images (e.g., alpine)
+
+Regularly scan images for vulnerabilities (e.g., Trivy, Snyk)
+
+Avoid running containers as root
+
+Use signed images from trusted registries
+
+🔹 20. How do you manage secrets in Docker?
+Avoid putting secrets in Dockerfile or ENV
+
+Use Docker Secrets (in Swarm) or tools like HashiCorp Vault, AWS Secrets Manager
+
+🔹 21. How do you reduce Docker image size?
+Use multi-stage builds
+
+Remove unnecessary dependencies
+
+Use smaller base images (alpine)
+
+Clean up cache after install
+
+🔹 22. Explain multi-stage builds.
+A way to build smaller and more secure images by using intermediate stages:
+
+dockerfile
+Copy
+Edit
+FROM node:16 as builder
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+🔹 23. What is the difference between COPY and ADD in Dockerfile?
+COPY – copies files/directories
+
+ADD – same as COPY but also extracts archives and supports remote URLs
+
+🔹 24. How do you push an image to Docker Hub?
+bash
+Copy
+Edit
+docker tag myimage username/myimage:latest
+docker push username/myimage:latest
+🔹 25. Have you used any tools to scan Docker images?
+Yes, tools like:
+
+Trivy – Fast and easy to integrate
+
+Grype – CVE scanning
+
+Snyk – Vulnerability scanning with remediation
+
+Docker Scout – Native Docker security
+
+🔹26.A container keeps restarting — how do you troubleshoot?
+  I check logs using docker logs <id> to see the error, inspect the restart policy with docker inspect, and run the container interactively using --entrypoint /bin/bash to debug inside.
+Most issues are due to missing configs or app crashes.
+🔹27.Image size is too large — how do you optimize it?
+I use smaller base images like alpine, apply multi-stage builds, clean up temp files, combine RUN layers, and use .dockerignore to avoid unnecessary files.
+✅ 28. Best practices for handling secrets in Docker?
+I never store secrets in Dockerfiles. I inject them at runtime via environment variables or secret managers like Vault or AWS Secrets Manager. In Swarm, I use Docker Secrets.
+✅ 29. Difference between ENTRYPOINT and CMD?
+ENTRYPOINT defines the fixed command. CMD provides default arguments. CMD can be overridden at runtime, but ENTRYPOINT always runs unless manually changed.
+✅ 30  What is the purpose of a multi-stage Dockerfile?
+The purpose of a multi-stage Dockerfile is to build smaller, cleaner, and more secure images by separating the build environment from the final image.
+✅ 31 What does ENTRYPOINT do in Docker?
+ ✅ 32 Difference between ENTRYPOINT and CMD?
+CMD		: to execute linux commands(container creation)
+ENTRYPOINT	: high priority than CMD
+✅ 33 Difference between COPY and ADD in Docker?
+COPY		: it will copy local files to conatiner.
+ADD		: it will copy internet files to conatiner.
