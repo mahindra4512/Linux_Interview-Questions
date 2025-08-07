@@ -177,3 +177,4 @@ ENTRYPOINT	: high priority than CMD
 ✅ 33 Difference between COPY and ADD in Docker?
 COPY		: it will copy local files to conatiner.
 ADD		: it will copy internet files to conatiner.
+34.How do you pass environment variables during Docker build commands? What services do you use for storing Docker images?
