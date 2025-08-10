@@ -1,0 +1,20 @@
+Hi, I’m mahendra, a DevOps Engineer with ~3.5 years of experience.
+I started at Capgemini and I’m currently with Digital XC AI. My core strengths are CI/CD, jenkins, Ansible, containers, and Infrastructure as Code on AWS.
+At Capgemini, I built and maintained Jenkins pipelines integrated with Git/GitHub, SonarQube, and Nexus—standardizing branching (feature/release/hotfix) and tightening our quality gates.
+On the platform side, I managed AWS services like EC2, VPC, S3, IAM, RDS, Route 53 and ELB/ALB.
+I’m strong in Terraform and Ansible: I automated environment provisioning with Terraform modules and remote state, which cut manual provisioning time by about 70% and made environments consistent.
+With Ansible, I handled configuration and day-2 ops—roles for users/groups, package and service management, hardening, and repeatable app setup—so we could move faster with fewer config drifts.
+In my current role, I focus on Linux/Windows administration, automation with Bash/Ansible, and monitoring with Prometheus & Grafana to keep systems healthy. 
+Across projects I’ve also used GitHub Actions for builds/tests where it fit better than Jenkins.
+
+I’m looking to contribute in a role where I can scale CI/CD, strengthen Terraform/Ansible automation, and run reliable container platforms on AWS—while continuously improving release speed, security, and observability.
+
+What are your day-to-day DevOps activities?
+Day to day, I keep our delivery pipeline and infrastructure healthy and automated.
+I start with stand-up and triage: fix or re-run any broken Jenkins pipelines, check SonarQube quality gates, and make sure artifacts are versioned in Nexus and images are pushed to Docker Hub.
+On the platform side, I maintain IaC with Terraform—updating modules, reviewing plan outputs, managing remote state in S3 with locking, and promoting changes dev→qa→prod via pipelines. For configuration, 
+I use Ansible roles to handle OS hardening, users/groups, packages, and app configs; secrets go via Ansible Vault/SSM.
+
+What is devops?
+DevOps is a software development approach that emphasizes collaboration and communication between development (Dev) and IT operations (Ops) teams to shorten the software development lifecycle and improve the quality and reliability of software releases.
+It's a cultural, philosophical, and practical approach that combines software development and IT operations to shorten the development lifecycle and enable continuous delivery of high-quality software
