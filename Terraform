@@ -1,1 +1,85 @@
-
+1. What is a Terraform state file?
+Ans:
+terrform state file is used to store resource current state information.
+it will contain end to end info of our resource.
+its very important file in terraform so we need to keep it safe and secure.
+if we lost that file we cant track the infra.
+terraform state list : to show total resources inside state file
+2. What is a Terraform provider?
+Ans:
+A provider is a plugin that allows Terraform to interact with APIs of cloud platforms or services (e.g., AWS, Azure, GCP).
+It’s defined in the configuration using the provider block.
+Ex: provider "aws"{
+region = "us-east1"
+}
+3.How to handle multiple environments in Terraform?
+Ans:
+I use workspaces (terraform workspace) or maintain separate folders/modules for dev, test, and prod, each with its own variable files (.tfvars). 
+This keeps configurations isolated.
+4.How to manage dependent resources in Terraform?
+Ans:
+Terraform automatically handles dependencies by referencing outputs from one resource in another. If needed, I use the depends_on argument to explicitly set the dependency order.
+5.What is a Terraform dependency graph?
+Ans:
+It’s an internal representation showing the relationships between resources. Terraform uses it to determine the correct order of operations during plan and apply.
+6.Your terraform apply failed halfway due to a network outage. How do you fix it?
+Answer:
+I’d first check the state file to ensure it’s not corrupted, then re-run terraform apply. Terraform will only create the missing resources since the existing ones are already in the state.
+7.You manually changed a resource in the cloud console. What happens in Terraform?
+Answer:
+That’s drift. Running terraform plan will show the difference. I can either update my code to match the change or apply Terraform to revert it.
+8.Two developers ran terraform apply at the same time and caused conflicts. How do you avoid this?
+Answer:
+Use a remote backend with state locking (e.g., AWS S3 + DynamoDB, Azure Blob + State Locking) to prevent concurrent changes.
+9.You need to share Terraform state across teams securely.
+Answer:
+Store it in a remote backend like AWS S3 with encryption, enable locking with DynamoDB, and restrict access with IAM policies.
+10.How does Terraform maintain the state of resources?
+Ans:
+Terraform keeps a state file (terraform.tfstate) that maps your code to real cloud resources (IDs, metadata).
+It uses this to calculate diffs during plan/apply. In teams, we store it in a remote backend (e.g., S3 + DynamoDB lock / Azure Blob) for sharing and state locking.
+11.What are Terraform modules?
+Ana:
+Modules are reusable packages of Terraform code (a folder with .tf files) that encapsulate resources and expose inputs/outputs. 
+They promote DRY, consistency, and easier multi-env reuse.
+12.How to manage sensitive variables in Terraform?
+Ans:
+Don’t hardcode. Use:
+variable "x" { sensitive = true } (hides in CLI/UI)
+.tfvars files kept out of VCS, or environment variables
+Secret managers (Vault, AWS Secrets Manager, Azure Key Vault) + CI/CD injection
+Remote backends with encryption + access controls
+13.Purpose of terraform validate and terraform fmt?
+Ans:
+terraform validate → Static checks: verifies config is syntactically valid and internally consistent.
+terraform fmt → Auto-formats code to the canonical style, keeping reviews clean and consistent.
+14.How do you handle provisioning in different environments (dev/stage/prod)?
+Ans:
+three common patterns (I use what fits the org):
+Workspaces: same code, different state per env (terraform workspace select prod).
+Env folders: envs/dev, envs/stage, envs/prod each with its own *.tfvars and backend.
+Modules + tfvars: one module, per-env tfvars passed via CI/CD.
+15.Show you how to import existing resources into Terraform state
+Ans:
+terraform import brings an existing resource under Terraform management without recreating it.
+16.What is a null resource in Terraform?
+Ans:
+A null_resource in Terraform is a special resource that doesn’t create any infrastructure itself but lets you run provisioners like local-exec or remote-exec.
+It’s often used for running scripts, configuration tasks, or orchestration steps that depend on other Terraform resources.
+17.What is terraform refresh?
+In Terraform, terraform refresh updates the state file with the actual state of resources in the real infrastructure by querying the provider APIs.
+18.Write a script to create a ec2 instance and a S3 bucket.
+Ans:
+19.Write a module to create ec2 instance.
+Ans:
+20.Where do you keep your state file and why?
+Answer (interview-short):
+Remote backend (e.g., S3 with DynamoDB lock, or Azure Blob with locking) so teams can share state, get locking to avoid concurrent applies, have encryption, versioning, and backups.
+Don’t keep state local in teams.
+21.What is a workspace in Terraform?
+Answer (interview-short):
+Workspaces let you use the same code with separate state per environment (e.g., default, dev, stage, prod). They’re good for light env separation; for stricter isolation, use separate backends or folders.
+22.What is state locking in Terraform?
+Answer (interview-short):
+State locking prevents simultaneous state modifications during plan/apply to avoid race conditions. Remote backends like S3 (+ DynamoDB) or Terraform Cloud provide locking.
+23.
